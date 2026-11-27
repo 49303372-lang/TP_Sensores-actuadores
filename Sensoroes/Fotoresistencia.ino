@@ -1,4 +1,4 @@
-//Grupo 4 Ayra, Bocalandro, Pinkus
+//Grupo 7 Ayra, Bocalandro, Pinkus
 #define Ldr 32
 
 void setup() {
