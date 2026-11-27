@@ -1,0 +1,16 @@
+//Grupo 7 Ayra, Bocalandro, Pinkus
+#define PIN_PRESENCIA 27
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(PIN_PRESENCIA, INPUT);
+}
+
+void loop() {
+  int presencia = digitalRead(PIN_PRESENCIA);
+
+  Serial.print("Valor del sensor: ");
+  Serial.println(presencia);
+
+  delay(500);
+}
