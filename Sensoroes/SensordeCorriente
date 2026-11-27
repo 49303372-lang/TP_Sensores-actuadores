@@ -1,0 +1,43 @@
+//Grupo 7 Ayra, Bocalandro, Pinkus
+
+#include <Wire.h>
+#include "INA226.h"
+
+
+#define SDA_PIN 21
+#define SCL_PIN 22
+#define INTERVALO 2500
+
+
+INA226 INA(0x40);
+
+unsigned long tiempoAnterior = 0;
+
+void setup() {
+  Serial.begin(115200);
+ 
+  Wire.begin(SDA_PIN, SCL_PIN);
+
+  while (!INA.begin()) {
+    Serial.println("Buscando módulo WCMCU-226 (INA226)...");
+    delay(500);
+  }
+
+  INA.setMaxCurrentShunt(0.8, 0.100);
+  Serial.println("Sensor de corriente INA226 inicializado correctamente");
+}
+
+void loop() {
+  unsigned long tiempoActual = millis();
+ 
+  if (tiempoActual - tiempoAnterior >= INTERVALO) {
+    tiempoAnterior = tiempoActual;
+   
+    float corriente = INA.getCurrent_mA();
+   
+    Serial.print("Corriente: ");
+    Serial.print(corriente, 1);
+    Serial.println(" mA");
+  }
+}
+
